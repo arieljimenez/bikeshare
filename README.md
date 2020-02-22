@@ -9,13 +9,13 @@ A simple React frontend to render NYC’s Citi bike station data.
 - Docker
 - Docker Compose
 
-## Development
+### Contribute
 
 Demo ones and also:
 
 - nvm
 
-### Frontend
+## Development
 
 - Go to `~/web/` and run:
   - `$ nvm install`
