@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Switch, Route } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
 
 import StationList from './containers/StationList';
+import StationDetails from './containers/StationDetails';
+import TopBar from './components/TopBar';
+
+import { StationsContextProvider } from './contexts/StationsContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,30 +18,30 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   toolbar: theme.mixins.toolbar,
+  links: {
+    textDecoration: "none",
+    color: "white"
+  }
 }));
 
 function App() {
   const classes = useStyles();
 
   return (
-    <HashRouter>
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" noWrap>
-              NYC City Bike
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Switch>
-            <Route exact path="/" component={StationList} />
-          </Switch>
-        </main>
-      </div>
-    </HashRouter>
+    <StationsContextProvider>
+      <HashRouter>
+        <div className={classes.root}>
+          <TopBar styles={classes} />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Switch>
+              <Route exact path="/" component={StationList} />
+              <Route exact path="/station/:stationID" component={StationDetails} />
+            </Switch>
+          </main>
+        </div>
+      </HashRouter>
+    </StationsContextProvider>
   );
 }
 

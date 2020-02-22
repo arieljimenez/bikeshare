@@ -1,6 +1,6 @@
 {
   "name": "bikeshare_web",
-  "title": "Bikeshare APP",
+  "title": "Bike Share APP",
   "description": "Frontend of the Bikeshare app",
   "version": "0.0.1",
   "private": true,
@@ -14,12 +14,11 @@
   "dependencies": {
     "@material-ui/core": "^4.9.3",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.44",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

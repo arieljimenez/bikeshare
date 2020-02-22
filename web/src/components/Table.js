@@ -15,6 +15,7 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -81,26 +82,6 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
-}
-
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
-
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
@@ -108,7 +89,10 @@ const useStyles2 = makeStyles({
 });
 
 export default function CustomPaginationActionsTable(props) {
-  const { rowItems } = props;
+  const {
+    rowItems = [],
+    handleRowClick = () => console.log('NOT IMPLEMENTED YET')
+  } = props;
 
   const classes = useStyles2();
   const [page, setPage] = React.useState(0);
@@ -142,11 +126,16 @@ export default function CustomPaginationActionsTable(props) {
         ? rowItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         : rowItems
       ).map(row => (
-        <TableRow key={row.stationName}>
+        <TableRow key={row.stationName} hover onClick={() => handleRowClick(row)}>
           <TableCell component="th" scope="row">
             {row.stationName}
           </TableCell>
-          <TableCell align="right">{row.statusValue}</TableCell>
+          <TableCell align="right">
+            <Chip
+              color={row.statusValue  === 'In Service' ? 'primary' : 'secondary'}
+              label={row.statusValue}
+            />
+          </TableCell>
           <TableCell align="right">{row.availableDocks}</TableCell>
           <TableCell align="right">{row.totalDocks}</TableCell>
         </TableRow>
@@ -170,7 +159,7 @@ export default function CustomPaginationActionsTable(props) {
             <TablePagination
               rowsPerPageOptions={[10, 25, 50, { label: 'All', value: -1 }]}
               colSpan={4}
-              count={rows.length}
+              count={rowItems.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{

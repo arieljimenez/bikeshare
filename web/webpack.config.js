@@ -1,4 +1,4 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   module: {
@@ -18,6 +18,6 @@ module.exports = {
       title: require('./package.json').title,
       template: './static/index.html',
       hash: true
-    }),
-  ],
+    })
+  ]
 };
