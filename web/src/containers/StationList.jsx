@@ -1,12 +1,23 @@
 import React from 'react';
 
-/**
- * StationList component.
- *
- * @param {object} props - The props for the component.
- */
-export default function StationList(props){
+import Table from '../components/Table';
+import { fetchAll } from '../api';
+
+
+export default function StationList(){
+  const [stations, setStations] = React.useState([]);
+
+  React.useEffect(() => {
+    async function fetchStations() {
+      const stations = await fetchAll('citibikenyc');
+
+      setStations(stations);
+    }
+
+    fetchStations();
+  });
+
   return(
-    <h1>See you in valhalla!!</h1>
+    <Table rowItems={stations} />
   )
 }

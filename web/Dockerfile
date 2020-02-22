@@ -2,9 +2,6 @@ FROM node:12.16.1-alpine3.9
 
 WORKDIR /app
 
-RUN ls
-RUN pwd
-
 ADD src \
   static \
   .babelrc \
