@@ -11,6 +11,12 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    proxy: {
+      '/citibikenyc': {
+        target: 'http://api:3000/api/v1/',
+        secure: false
+      }
+    }
   },
   mode: process.env.NODE_ENV || 'development',
   plugins: [

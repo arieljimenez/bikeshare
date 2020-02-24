@@ -1,7 +1,6 @@
 version: '3.7'
 services:
   frontend:
-    container_name: frontend
     build: ./web
     ports:
       - "8000:8080"
@@ -9,10 +8,16 @@ services:
       - "./web:/app"
     links:
       - api
+    networks:
+      - backend
   api:
-    container_name: backend
     build: ./api
     ports:
-      - "3000:3000"
+      - "3000"
     volumes:
       - "./api:/app"
+    networks:
+      - backend
+networks:
+  backend:
+    driver: "bridge"

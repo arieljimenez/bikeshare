@@ -6,8 +6,7 @@ const server = express();
 require('./routes')(server);
 
 // get env variables
-const { ENV, API_PORT = 3000 } = process.env;
-
+const { ENV = 'development', API_PORT = 3000 } = process.env;
 
 server.listen(API_PORT, async function () {
   console.log('=============================');
